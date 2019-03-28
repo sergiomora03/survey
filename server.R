@@ -79,14 +79,14 @@ shinyServer(function(input, output) {
     # If the user has clicked through all of the survey questions
     # then R saves the results to the survey file.
     if (input$Click.Counter==nrow(Qlist)+1) {
-      if (file.exists("survey_results.Rdata")) 
-        load(file="survey_results.Rdata")
-      if (!file.exists("survey_results.Rdata")) 
+      if (file.exists("survey_results.csv")) 
+        load(file="survey_results.csv")
+      if (!file.exists("survey_results.csv")) 
         presults<-NULL
       presults <- presults <<- rbind(presults, results)
       rownames(presults) <- rownames(presults) <<- 
         paste("User", 1:nrow(presults))
-      save(presults, file="survey_results.Rdata")
+      save(presults, file="survey_results.csv")
     }
     # Because there has to be a UI object to call this
     # function I set up render text that distplays the content
@@ -102,7 +102,7 @@ shinyServer(function(input, output) {
   
   # This renders the data downloader
   output$downloadData <- downloadHandler(
-    filename = "IndividualData.csv",
+    filename = "Data.csv",
     content = function(file) {
       write.csv(presults, file)
     }
