@@ -1,4 +1,6 @@
 library(shiny)
+library(writexl)
+library(dplyr)
 
 # Define UI for slider demo application
 shinyUI(pageWithSidebar(
@@ -11,13 +13,13 @@ shinyUI(pageWithSidebar(
     h6(textOutput("save.results")),
     h5("Created by:"),
     tags$a("Analytical & Technology Department of the Politécnico Grancolombiano", 
-           href="https://www.poli.edu.co/"), #este link o otro?
+           href = "https://www.poli.edu.co/"), #este link o otro?
     h5("For details on how data is generated:"),
     tags$a("Contact: Mora, S.", 
-           href="https://co.linkedin.com/in/sergiomorapardo"),
+           href = "https://co.linkedin.com/in/sergiomorapardo"),
     h5("Github Repository:"),
     tags$a("Survey implementation", 
-           href=paste0("https://github.com/sergiomora03/",
+           href = paste0("https://github.com/sergiomora03/",
                        "survey")),
     # Display the page counter text.
     h5(textOutput("counter"))
@@ -30,6 +32,11 @@ shinyUI(pageWithSidebar(
     # object (where the welcome message, survey, and results appear)
     uiOutput("MainAction"),
     # This displays the action putton Next.
-    actionButton("Click.Counter", "Next")    
+    actionButton("Click.Counter", "Next"),
+    br(),
+    br(),
+    hr(),
+    selectInput(inputId = "user", label = "User", choices = paste("User -", 1:25))
+    
   )
 ))
